@@ -11,22 +11,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (  
-    <Router>
     <Layout>
       <Routes>
           <>
-            <Route exact path="/" component={LoginContainer} />
+            <Route path="/" element={<LoginContainer/>} />
           </>
       </Routes>
-        </Layout>
-    </Router>
+    </Layout>
     );
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App /> 
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

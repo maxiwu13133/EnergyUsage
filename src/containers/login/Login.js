@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 
 const Login = () => {
   return (
-    <>
       <div>
         <Formik
           initialValues={{
@@ -35,7 +34,6 @@ const Login = () => {
           </Form>
         </Formik>
       </div>
-    </>
   )
 }
 
