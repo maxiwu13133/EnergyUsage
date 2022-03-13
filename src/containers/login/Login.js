@@ -5,26 +5,33 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-const Login = () => {
+const Login = (props) => {
   return (
     <div id='login-container'>
       <div id='login-bg'>
         <div id='login-card'>
           <Formik
+            onSubmit={
+              (values) => {
+              // if (values.username === "admin" && values.password === '123abc') {
+                props.history.push('/')
+              // }
+            }}
             initialValues={{
               username: '',
               password: ''
             }}
           >
-            <Form>
+            {({values, handleChange}) => 
+            (<Form>
               <Form.Group>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Username'
                   name='username'
-                  // value={values.username}
-                  // onChange={handleChange}
+                  value={values.username}
+                  onChange={handleChange}
                   required
                 />
                 <Form.Label>Password</Form.Label>
@@ -32,8 +39,8 @@ const Login = () => {
                   type='text'
                   placeholder='Password'
                   name='password'
-                  // value={values.username}
-                  // onChange={handleChange}
+                  value={values.password}
+                  onChange={handleChange}
                   required
                 />
               </Form.Group>
@@ -51,7 +58,8 @@ const Login = () => {
               <Link to='/signup'>
                 <p id='login-signup-link'>Create an Account</p>
               </Link>
-            </Form>
+            </Form>)
+            }
           </Formik>
         </div>
       </div>
