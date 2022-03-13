@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       {
-      window.location.pathname !== "/" ||
+      window.location.pathname !== "/" &&
       window.location.pathname !== "/sign-up" ? 
       (<HeaderBar/>) : null}
       {/* <div> */}
