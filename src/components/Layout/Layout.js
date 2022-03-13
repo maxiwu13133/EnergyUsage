@@ -5,7 +5,10 @@ import HeaderBar from "./HeaderBar";
 const Layout = ({ children }) => {
   return (
     <>
-      <HeaderBar/>
+      {
+      window.location.pathname !== "/" ||
+      window.location.pathname !== "/sign-up" ? 
+      (<HeaderBar/>) : null}
       {/* <div> */}
       <div className="appContent">{children}</div>
       {/* </div> */}
