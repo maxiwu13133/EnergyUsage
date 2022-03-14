@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  incrementAsync, selectCount, selectCountLogin, selectCountSignup,
+  incrementAsync, selectCount, selectCountLogin, selectCountSignup, incrementLogin
 } from './components/counter/counterSlice';
 import styles from './components/counter/Counter.module.css';
 
@@ -12,16 +12,12 @@ const Admin = () => {
   
   let countLogin = useSelector(selectCountLogin);
   let countSignup = useSelector(selectCountSignup);
+  console.log(countLogin)
   return (
     <div>
       <p>Login request: {countLogin}</p>
+      <button onClick={() => dispatch(incrementLogin())}>hello</button>
       <p>Signup requests: {countSignup}</p>
-      <button
-        className={styles.asyncButton}
-        onClick={() => dispatch(incrementAsync(incrementValue))}
-      >
-        Add Async
-      </button>
     </div>
   );
 };
