@@ -3,6 +3,8 @@ import { fetchCount } from './counterAPI';
 
 const initialState = {
   value: 0,
+  loginRequests: 0,
+  signupRequests: 0,
   status: 'idle',
 };
 
@@ -31,6 +33,20 @@ export const counterSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.value += 1;
+    },
+    incrementLogin: (state) => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.loginRequests += 1;
+    },
+    incrementSignup: (state) => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.signupRequests += 1;
     },
     decrement: (state) => {
       state.value -= 1;

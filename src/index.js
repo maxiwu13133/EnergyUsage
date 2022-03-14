@@ -8,24 +8,30 @@ import * as serviceWorker from './serviceWorker';
 import LoginContainer from './containers/login';
 import Layout from './components/Layout/Layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeContainer from './containers/home';
+import SignUpContainer from './containers/signup';
+import Admin from './admin';
 
 const App = () => {
-  return (  
+  return (
     <Layout>
       <Routes>
-          <>
-            <Route path="/" element={<LoginContainer/>} />
-          </>
+        {/* <> */}
+        <Route path='/' element={<LoginContainer />} />
+        <Route path='/home' element={<HomeContainer />} />
+        <Route path='/signup' element={<SignUpContainer />} />
+        <Route path='/admin' element={<Admin />} />
+        {/* </> */}
       </Routes>
     </Layout>
-    );
+  );
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App /> 
+        <App />
       </Router>
     </Provider>
   </React.StrictMode>,
@@ -36,4 +42,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-

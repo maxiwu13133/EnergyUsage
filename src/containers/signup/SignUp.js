@@ -3,35 +3,9 @@ import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import './Login.css';
-import { getUser } from '../../components/counter/counterAPI';
-import { increment } from '../../components/counter/counterSlice';
-import { useDispatch } from 'react-redux';
+import './SignUp.css';
 
-const Login = (props) => {
-  let dispatch = useDispatch();
-  const authFunc = async (username, password) => {
-    let nameV = "admin";
-    let scoreV = "123abc";
-    const xhttp = new XMLHttpRequest();
-    
-
-    let params = {username: username, password: password };
-
-    // if (validateScore(scoreV)) {
-        xhttp.open('post', "mincasa.ictus.tech/api/login/v1", true);
-        xhttp.setRequestHeader("Content-type", "application/JSON");
-        xhttp.onreadystatechange = function () {
-            if (this.readState === 4 && this.status === 200) {
-              return dispatch(increment)
-            }
-        // }
-        // xhttp.send(JSON.stringify(params));
-    }
-    // else {
-    //     document.getElementById("response").innerHTML = "Score must be an integer"
-    // }
-// }
+const SignUp = (props) => {
   return (
     <div id='login-container'>
       <div id='login-bg'>
@@ -39,13 +13,13 @@ const Login = (props) => {
           <Formik
             onSubmit={
               (values) => {
-                
               // if (values.username === "admin" && values.password === '123abc') {
-                authFunc(values.username, values.password);
-                props.history.push('/home')
+                props.history.push('/')
               // }
             }}
             initialValues={{
+              firstname: '',
+              lastname: '',
               username: '',
               password: ''
             }}
@@ -53,6 +27,24 @@ const Login = (props) => {
             {({values, handleChange}) => 
             (<Form>
               <Form.Group>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='First Name'
+                  name='firstname'
+                  value={values.firstname}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Lastname'
+                  name='lastname'
+                  value={values.lastname}
+                  onChange={handleChange}
+                  required
+                />
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type='text'
@@ -79,12 +71,12 @@ const Login = (props) => {
                 type='submit'
                 className='custom-primary-button'
               >
-                Login
+                Sign Up
               </Button>
               <br />
 
-              <Link to='/signup'>
-                <p id='login-signup-link'>Create an Account</p>
+              <Link to='/login'>
+                <p id='login-signup-link'>Back to Login</p>
               </Link>
             </Form>)
             }
@@ -95,4 +87,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default SignUp;
