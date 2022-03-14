@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import { getUser } from '../../components/counter/counterAPI';
-import { increment } from '../../components/counter/counterSlice';
+import { incrementLogin } from '../../components/counter/counterSlice';
 import { useDispatch } from 'react-redux';
 
 const Login = (props) => {
@@ -23,7 +23,7 @@ const Login = (props) => {
         xhttp.setRequestHeader("Content-type", "application/JSON");
         xhttp.onreadystatechange = function () {
             if (this.readState === 4 && this.status === 200) {
-              return dispatch(increment)
+              return dispatch(incrementLogin)
             }
         // }
         // xhttp.send(JSON.stringify(params));
@@ -42,7 +42,7 @@ const Login = (props) => {
                 
               // if (values.username === "admin" && values.password === '123abc') {
                 authFunc(values.username, values.password);
-                props.history.push('/home')
+                props.history.push('/admin')
               // }
             }}
             initialValues={{
