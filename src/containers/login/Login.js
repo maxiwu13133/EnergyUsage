@@ -35,7 +35,7 @@ const Login = () => {
               xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                   console.log('before if' + xhttp.readyState);
-                  dispatch(incrementLogin()) && navigate('/admin');
+                  dispatch(incrementLogin()) && navigate('/admin/admin');
                 }
               };
             }}
