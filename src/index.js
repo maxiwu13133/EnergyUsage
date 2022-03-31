@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomeContainer from './containers/home';
 import SignUpContainer from './containers/signup';
 import Admin from './admin';
+import SettingsContainer from './containers/settings';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/home' element={<HomeContainer />} />
         <Route path='/signup' element={<SignUpContainer />} />
         <Route path='/admin/admin' element={<Admin />} />
-        {/* </> */}
+        <Route path='/settings' element={<SettingsContainer />} />
       </Routes>
     </Layout>
   );
