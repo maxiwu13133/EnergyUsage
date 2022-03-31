@@ -54,13 +54,13 @@ app.post("/API/v1/admin", (req, res) => {
                             reqCountSignup: reqCountSignup,
                             reqCountAdmin: reqCountAdmin
                         };
-                        res.status(200).json(JSON.stringify(response));
+                        res.status(200).send(JSON.stringify(response));
                     } else {
-                        res.status(401).json("Unauthorized.");
+                        res.status(401).send("Unauthorized.");
                     }
                     
                 } else {
-                    res.status(400).json("Incorrect password.");
+                    res.status(400).send("Incorrect password.");
                 }
             });
     });
@@ -91,9 +91,9 @@ app.post("/API/v1/login", (req, res) => {
                 }
 
                 if (await argon2.verify(sqlRes[0].password, password)) {                    
-                    res.status(200).json("successful login.");
+                    res.status(200).send("successful login.");
                 } else {
-                    res.status(400).json("Incorrect password.");
+                    res.status(400).send("Incorrect password.");
                 }
             });
     });
