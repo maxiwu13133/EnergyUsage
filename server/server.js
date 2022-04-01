@@ -1,4 +1,4 @@
-const express = require("express"); // ** 401 Unauthorized for wrong password!!
+const express = require("express");
 const mysql = require("mysql");
 const argon2 = require("argon2");
 const url = require("url");
@@ -61,7 +61,7 @@ app.post("/API/v1/admin", (req, res) => {
                     }
                     
                 } else {
-                    res.status(400).send("Incorrect password.");
+                    res.status(401).send("Incorrect password.");
                 }
             });
     });
@@ -94,7 +94,7 @@ app.post("/API/v1/login", (req, res) => {
                 if (await argon2.verify(sqlRes[0].password, password)) {                    
                     res.status(200).send("successful login.");
                 } else {
-                    res.status(400).send("Incorrect password.");
+                    res.status(401).send("Incorrect password.");
                 }
             });
     });
@@ -122,10 +122,10 @@ app.post("/API/v1/signup", (req, res) => {
                     } else {
                         res.status(404).send(sqlErr.message);
                     }
-                    
-                    return console.log(sqlErr);
                 }
-                res.status(200).send(JSON.stringify(sqlRes.message));
+                else {
+                    res.status(200).send(JSON.stringify(sqlRes.message));
+                }
             });
     });
 });
@@ -152,10 +152,10 @@ app.put("/API/v1/settings/username", (req, res) => {
                     } else {
                         res.status(404).send(sqlErr.message);
                     }
-                    
-                    return console.log(sqlErr);
                 }
-                res.status(200).send(JSON.stringify(sqlRes.message));
+                else {
+                    res.status(200).send(JSON.stringify(sqlRes.message));
+                }
             });
     });
 });
@@ -183,10 +183,10 @@ app.put("/API/v1/settings/password", (req, res) => {
                     } else {
                         res.status(404).send(sqlErr.message);
                     }
-                    
-                    return console.log(sqlErr);
                 }
-                res.status(200).send(JSON.stringify(sqlRes.message));
+                else {
+                    res.status(200).send(JSON.stringify(sqlRes.message));
+                }
             });
     });
 });
@@ -212,21 +212,14 @@ app.delete("/API/v1/settings/delete", (req, res) => {
                     } else {
                         res.status(404).send(sqlErr.message);
                     }
-                    
-                    return console.log(sqlErr);
                 }
-                res.status(200).send(JSON.stringify(sqlRes.message));
+                else {
+                    res.status(200).send(JSON.stringify(sqlRes.message));
+                }
             });
     });
 });
 
-
-
-
-
-
-
-//-----------
 app.get("/API/v1/usage", (req, res) => { // http://mincasa.khademsam.com/API/v1/usage/?username=sam -> {"average":92.5,"current_amount":95,"prev_amount":95}
     const q = url.parse(req.url, true);
     const username = q.query.username;
@@ -234,7 +227,11 @@ app.get("/API/v1/usage", (req, res) => { // http://mincasa.khademsam.com/API/v1/
                       WHERE username='${username}'`;
     connection.query(sqlQuery, (sqlErr, sqlRes) => {
         if (sqlErr) {
-            res.status(404).send(sqlErr.message);  // 400 ?! 404 (dont need both! I think)
+            if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                res.status(400).send(sqlErr.message);
+            } else {
+                res.status(404).send(sqlErr.message);
+            }
         } else {
             const current_date = new Date();
             const current_year = current_date.getFullYear();
@@ -268,7 +265,11 @@ app.get("/API/v1/usage/bills", (req, res) => { // http://mincasa.khademsam.com/A
                       WHERE username='${username}'`;
     connection.query(sqlQuery, (sqlErr, sqlRes) => {
         if (sqlErr) {
-            res.status(404).send(sqlErr.message);  // 400 ?! 404 (dont need both! I think)
+            if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                res.status(400).send(sqlErr.message);
+            } else {
+                res.status(404).send(sqlErr.message);
+            }
         } else {
             res.status(200).send(JSON.stringify(sqlRes));
         }
@@ -300,13 +301,21 @@ app.post("/API/v1/usage/addbill", (req, res) => {
 
         connection.query(sqlQueryUpdatePoints, (sqlErr, sqlRes) => {
             if (sqlErr) {
-                res.status(404).send(sqlErr.message);   // 400 ?! 404 (dont need both! I think)
+                if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                    res.status(400).send(sqlErr.message);
+                } else {
+                    res.status(404).send(sqlErr.message);
+                }
             } else {
                 const sqlQueryGetPoints = `INSERT INTO bill (username, month, year, amount) 
                                            VALUES ('${parsedObj.username}', ${parsedObj.month}, ${parsedObj.year}, ${parsedObj.amount})`;
                 connection.query(sqlQueryGetPoints, (sqlErr, sqlRes) => {
                     if (sqlErr) {
-                        res.status(404).send(sqlErr.message);   // 400 ?! 404 (dont need both! I think)
+                        if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                            res.status(400).send(sqlErr.message);
+                        } else {
+                            res.status(404).send(sqlErr.message);
+                        }
                     } else {
                         res.status(200).send(JSON.stringify(sqlRes));
                     }
@@ -323,7 +332,11 @@ app.get("/API/v1/user", (req, res) => { // http://mincasa.khademsam.com/API/v1/u
                       WHERE username='${username}'`;
     connection.query(sqlQuery, (sqlErr, sqlRes) => {
         if (sqlErr) {
-            res.status(404).send(sqlErr.message);  // 400 ?! 404 (dont need both! I think)
+            if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                res.status(400).send(sqlErr.message);
+            } else {
+                res.status(404).send(sqlErr.message);
+            }
         } else {
             res.status(200).send(JSON.stringify(sqlRes));
         }
