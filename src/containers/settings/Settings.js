@@ -3,7 +3,6 @@ import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import './Settings.css'
-import Stack from 'react-bootstrap/stack'
 
 import { Link, useNavigate } from 'react-router-dom';
 

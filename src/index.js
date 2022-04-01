@@ -12,6 +12,7 @@ import HomeContainer from './containers/home';
 import SignUpContainer from './containers/signup';
 import Admin from './admin';
 import SettingsContainer from './containers/settings';
+import AchievementsContainer from './containers/achievements';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/signup' element={<SignUpContainer />} />
         <Route path='/admin/admin' element={<Admin />} />
         <Route path='/settings' element={<SettingsContainer />} />
+        <Route path='/achievements' element={<AchievementsContainer />} />
       </Routes>
     </Layout>
   );

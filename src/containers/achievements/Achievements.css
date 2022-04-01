@@ -1,0 +1,59 @@
+#achievements-container {
+  height: 100vh;
+  background-color: #94B447;
+  text-decoration: none;
+}
+
+#achievements-bg {
+  /* background-image: url("../../config/assets/images/login-bg.jpg"); */
+  height: 30rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+#achievements-card {
+    background-color: #FFF;
+    width: 21rem;
+    height: fit-content;
+    padding: 2rem;
+    margin: auto;
+    margin-top: 14rem;
+    box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+}
+
+.custom-primary-button {
+    background-color: #5D6E1E !important;
+    border-style: none !important;
+}
+
+.achievements-display-box {
+  margin: auto;
+  margin-top: 1rem;
+  background-color: #94B447;
+  width: 100%;
+  height: fit-content;
+  color: #FFF;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.achievements-display-box h5 {
+  margin: 0.5rem;
+}
+
+.achievements-display-box p {
+  margin: 0.5rem;
+  font-size: 1rem;
+}
+
+#achievements-username {
+  color: #94B447;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}
