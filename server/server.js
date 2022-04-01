@@ -18,7 +18,7 @@ let reqCountSignup = 0;
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
     next();
 });
@@ -114,6 +114,96 @@ app.post("/API/v1/signup", (req, res) => {
         const hashpass = await argon2.hash(parsedObj.password, {type: argon2.argon2id})
         const sqlQuery = `INSERT INTO user (username, password, admin) 
                           VALUES ('${parsedObj.username}', '${hashpass}', FALSE)`;
+        connection.query(sqlQuery,
+            (sqlErr, sqlRes) => {
+                if (sqlErr) {
+                    if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                        res.status(400).send(sqlErr.message);
+                    } else {
+                        res.status(404).send(sqlErr.message);
+                    }
+                    
+                    return console.log(sqlErr);
+                }
+                res.status(200).send(JSON.stringify(sqlRes.message));
+            });
+    });
+});
+
+app.put("/API/v1/settings/username", (req, res) => {
+    // reqCountSignup++;
+    let body = "";
+    req.on('data', function (chunk) {
+        if (chunk != null) { // Data may come in multiple chunks
+            body += chunk;
+        }
+    });
+
+    req.on('end', function () {
+        const parsedObj = JSON.parse(body);
+        const sqlQuery = `UPDATE user 
+                          SET username = '${parsedObj.new_username}'
+                          WHERE username = '${parsedObj.old_username}'`;
+        connection.query(sqlQuery,
+            (sqlErr, sqlRes) => {
+                if (sqlErr) {
+                    if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                        res.status(400).send(sqlErr.message);
+                    } else {
+                        res.status(404).send(sqlErr.message);
+                    }
+                    
+                    return console.log(sqlErr);
+                }
+                res.status(200).send(JSON.stringify(sqlRes.message));
+            });
+    });
+});
+
+app.put("/API/v1/settings/password", (req, res) => {
+    // reqCountSignup++;
+    let body = "";
+    req.on('data', function (chunk) {
+        if (chunk != null) { // Data may come in multiple chunks
+            body += chunk;
+        }
+    });
+
+    req.on('end', async function () {
+        const parsedObj = JSON.parse(body);
+        const hashpass = await argon2.hash(parsedObj.password, {type: argon2.argon2id})
+        const sqlQuery = `UPDATE user 
+                          SET password = '${hashpass}'
+                          WHERE username = '${parsedObj.username}'`;
+        connection.query(sqlQuery,
+            (sqlErr, sqlRes) => {
+                if (sqlErr) {
+                    if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                        res.status(400).send(sqlErr.message);
+                    } else {
+                        res.status(404).send(sqlErr.message);
+                    }
+                    
+                    return console.log(sqlErr);
+                }
+                res.status(200).send(JSON.stringify(sqlRes.message));
+            });
+    });
+});
+
+app.delete("/API/v1/settings/delete", (req, res) => {
+    // reqCountSignup++;
+    let body = "";
+    req.on('data', function (chunk) {
+        if (chunk != null) { // Data may come in multiple chunks
+            body += chunk;
+        }
+    });
+
+    req.on('end', function () {
+        const parsedObj = JSON.parse(body);
+        const sqlQuery = `DELETE FROM user
+                          WHERE username = '${parsedObj.username}'`;
         connection.query(sqlQuery,
             (sqlErr, sqlRes) => {
                 if (sqlErr) {
