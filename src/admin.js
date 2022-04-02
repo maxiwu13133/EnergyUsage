@@ -1,15 +1,12 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  incrementAsync, selectCount, selectCountLogin, selectCountSignup, incrementLogin, selectCountAdmin, incrementAdmin, incrementSignup
+  selectCountLogin, selectCountSignup, incrementLogin, selectCountAdmin, incrementAdmin, incrementSignup
 } from './components/counter/counterSlice';
 import { Link } from 'react-router-dom';
-import styles from './components/counter/Counter.module.css';
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-  const incrementValue = Number(incrementAmount) || 0;
   
   let countLogin = useSelector(selectCountLogin);
   let countSignup = useSelector(selectCountSignup);
@@ -32,7 +29,7 @@ const Admin = () => {
                 'http://mincasa.khademsam.com/API/v1/admin/',
                 true
               );
-              let creds = {username: "admin", password: "1234abcd"}
+              let creds = {username: "admin", password: "abcd1234"}
               xhttp.setRequestHeader('Content-type', 'application/JSON');
               xhttp.send(JSON.stringify(creds));
               xhttp.onreadystatechange = function() {
@@ -57,7 +54,7 @@ const Admin = () => {
         //check local token or something
 
   authFunc();
-    }, []);
+    }, );
   console.log("outsidee of fn:" + params.login)
   return (
     <div>

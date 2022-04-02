@@ -14,9 +14,10 @@
 }
 
 #login-card {
+
   background-color: #FFF;
-  width: 21rem;
-  height: 22.5rem;
+  width: auto;
+  height: 30rem;
   padding: 2rem;
   margin-top: 14rem;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
@@ -27,18 +28,8 @@
   border-style: none !important;
 }
 
-.link {
+#login-signup-link {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  color: #FFF;
-  text-decoration: underline;
+  color: #5D6E1E;
 }

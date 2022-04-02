@@ -4,16 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import { incrementLogin } from '../../components/counter/counterSlice';
+import { incrementLogin, updateUser } from '../../components/counter/counterSlice';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div id='login-container'>
-      <div id='login-bg'>
-        <div id='login-card'>
+    <>
           <Formik
             onSubmit={(values) => {
               const xhttp = new XMLHttpRequest();
@@ -25,6 +23,7 @@ const Login = () => {
               console.log(values.username);
               console.log(values.password);
               // if (values.password !== "") {
+                // dispatch(updateUser(params)) && (params.username === "admin" ? navigate('/admin/admin') : navigate('/home'));
               xhttp.open(
                 'POST',
                 'http://mincasa.khademsam.com/API/v1/login/',
@@ -35,10 +34,11 @@ const Login = () => {
               xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                   console.log('before if' + xhttp.readyState);
-                  dispatch(incrementLogin()) && navigate('/admin/admin');
+                  dispatch(updateUser(params)) && dispatch(incrementLogin()) && (params.username === "admin" ? navigate('/admin/admin') : navigate('/home'));
                 }
               };
-            }}
+            }
+          }
             initialValues={{
               username: '',
               password: ''
@@ -83,9 +83,7 @@ const Login = () => {
               </Form>
             )}
           </Formik>
-        </div>
-      </div>
-    </div>
+        </>
   );
 };
 
