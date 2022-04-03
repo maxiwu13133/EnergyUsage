@@ -87,6 +87,7 @@ export const selectCount = (state) => state.counter.value;
 export const selectCountLogin = (state) => state.counter.loginRequests;
 export const selectCountSignup = (state) => state.counter.signupRequests;
 export const selectCountAdmin = (state) => state.counter.adminRequests;
+export const selectUser = (state) => state.counter.user;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

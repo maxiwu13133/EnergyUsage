@@ -34,3 +34,39 @@
 #delete-account-link {
   margin-top: 1rem;
 }
+
+.delete-button {
+  border-style: none;
+  border-radius: 0.25rem;
+  width: fit-content;
+  height: 2rem;
+  background-color: #5D6E1E;
+  color: #FFF;
+}
+
+.settings-popup {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.settings-popup-question {
+  font-size: 1.5rem;
+}
+
+.settings-popup-btn {
+  border-style: none;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  color: #FFF;
+  background-color: #5D6E1E;
+  padding: 0.5rem;
+}
+
+.popup-content {
+  width: 30% !important;
+  height: 20%;
+}
