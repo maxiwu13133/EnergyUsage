@@ -3,20 +3,17 @@ import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { selectUser, updateUser } from '../../components/counter/counterSlice';
 import AddBillAlert from './AddBillAlert';
 
-const AddBill = () => {
-  const dispatch = useDispatch();
+const AddBill = ({user}) => {
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
-  const [ showA, setShowA ] = useState(true);
-  const toggleShowA = () => setShowA(!showA);
-  console.log(user)
+  // const [ showA, setShowA ] = useState(true);
+  // const toggleShowA = () => setShowA(!showA);
+  // console.log(user)
   return (
     <React.Fragment>
+      
       {/* <AddBillAlert show={showA}/> */}
       <Formik
         onSubmit={(values) => {
@@ -29,6 +26,7 @@ const AddBill = () => {
             year: values.year,
             amount: values.amount
           };
+          console.log('outsidee')
           xhttp.open(
             'POST',
             'http://mincasa.khademsam.com/API/v1/usage/addbill/',
@@ -42,6 +40,7 @@ const AddBill = () => {
             if (this.readyState === 4 && this.status === 200) {
               console.log('before if' + xhttp.readyState);
               console.log(params)
+              console.log("success")
               // toggleShowA();
               // setTimeout(() => toggleShowA, 2);
               // "admin" === params.username ? navigate('/admin/admin') : navigate('/home')
@@ -54,12 +53,12 @@ const AddBill = () => {
           amount: 0
         }}
       >
-        {({ values, handleChange }) => (
-          <Form>
+        {({ values, handleChange, handleSubmit }) => (
+          <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Amount</Form.Label>
               <Form.Control
-                type='text'
+                type='number'
                 placeholder='Bill Amount'
                 name='amount'
                 value={values.amount}
@@ -68,7 +67,7 @@ const AddBill = () => {
               />
               <Form.Label>Month</Form.Label>
               <Form.Control
-                type='text'
+                type='number'
                 placeholder='Month'
                 name='month'
                 value={values.month}
@@ -77,7 +76,7 @@ const AddBill = () => {
               />
               <Form.Label>Year</Form.Label>
               <Form.Control
-                type='text'
+                type='number'
                 placeholder='Year'
                 name='year'
                 value={values.year}
