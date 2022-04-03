@@ -1,10 +1,10 @@
-#settings-container {
+#achievements-container {
   height: 100vh;
   background-color: #94B447;
   text-decoration: none;
 }
 
-#settings-bg {
+#achievements-bg {
   /* background-image: url("../../config/assets/images/login-bg.jpg"); */
   height: 30rem;
   background-position: center;
@@ -15,10 +15,10 @@
   justify-content: center;
 }
 
-#settings-card {
+#achievements-card {
     background-color: #FFF;
     width: 21rem;
-    height: 22.5rem;
+    height: fit-content;
     padding: 2rem;
     margin: auto;
     box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
@@ -30,42 +30,29 @@
     border-style: none !important;
 }
 
-#delete-account-link {
+.achievements-display-box {
+  margin: auto;
   margin-top: 1rem;
-}
-
-.delete-button {
-  border-style: none;
-  border-radius: 0.25rem;
-  width: fit-content;
-  height: 2rem;
-  background-color: #5D6E1E;
-  color: #FFF;
-}
-
-.settings-popup {
-  padding: 1rem;
+  background-color: #94B447;
   width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 2rem;
-}
-
-.settings-popup-question {
-  font-size: 1.5rem;
-}
-
-.settings-popup-btn {
-  border-style: none;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  font-size: 1.5rem;
+  height: fit-content;
   color: #FFF;
-  background-color: #5D6E1E;
   padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.popup-content {
-  width: 30% !important;
-  height: 20%;
+.achievements-display-box h5 {
+  margin: 0.5rem;
+}
+
+.achievements-display-box p {
+  margin: 0.5rem;
+  font-size: 1rem;
+}
+
+#achievements-username {
+  color: #94B447;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
 }
