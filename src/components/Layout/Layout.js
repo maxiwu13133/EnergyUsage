@@ -1,29 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
-import HeaderBar from "./HeaderBar";
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import HeaderBar from './HeaderBar';
+import './Layout.css';
 
 const Layout = ({ children }) => {
   return (
-    <>
-      {
-      window.location.pathname !== "/" &&
-      window.location.pathname !== "/signup" &&
-      window.location.pathname !== "/admin" ? 
-      (<HeaderBar/>) : null}
-      {/* <div> */}
-      <div className="appContent">{children}</div>
-      {/* </div> */}
-    </>
+    <div id='login-container'>
+      <div id='login-bg'>
+        <div id='login-card'>
+          {window.location.pathname !== '' ||
+          window.location.pathname !== '/' ||
+          window.location.pathname !== '/signup' ||
+          window.location.pathname !== '/admin' ? (
+            <HeaderBar />
+          ) : null}
+          {/* <div> */}
+          <div className='appContent'>
+            {children}
+          </div>
+          {/* </div> */}
+        </div>
+      </div>
+    </div>
   );
 };
 
 Layout.defaultProps = {
-  children: null,
+  children: null
 };
 
 Layout.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default Layout;

@@ -1,12 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchCount } from './counterAPI';
 
-const initialState = {
+import { loadState } from '../../redux/localStorage';
+
+const persistedState = loadState();
+console.log(persistedState);
+const initialState = persistedState ? persistedState.counter : {
   value: 0,
   loginRequests: 0,
   signupRequests: 0,
   adminRequests: 0,
   status: 'idle',
+  user: {
+    username: null,
+    password: null
+  }
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -56,6 +64,11 @@ export const counterSlice = createSlice({
       // immutable state based off those changes
       state.signupRequests = action.payload;
     },
+    updateUser: (state, action) => {
+      console.log("payload: " + action.payload);
+      state.user.username = action.payload.username;
+      state.user.password = action.payload.password;
+    },
     decrement: (state) => {
       state.value -= 1;
     },
@@ -83,7 +96,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementAdmin, incrementLogin, incrementSignup, incrementByAmount, updateUser } = counterSlice.actions;
+export const { increment, decrement, incrementAdmin, incrementLogin, incrementSignup, updateUser, incrementByAmount } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
