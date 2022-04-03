@@ -26,7 +26,7 @@ const Achievements = () => {
     }
 
     const getInfo = () => {
-        fetch(END_POINT_ROOT + USER_RESOURCE + user)
+        fetch(END_POINT_ROOT + USER_RESOURCE + user.username)
             .then(response => {
                 return response.text()
             })
@@ -36,6 +36,7 @@ const Achievements = () => {
     }
 
     useEffect(() => {
+        console.log(user)
         getInfo()
     })
 
@@ -44,7 +45,7 @@ const Achievements = () => {
             <div id='achievements-bg'>
                 <div id='achievements-card'>
 
-                    <p id="achievements-username">{user}</p>
+                    <p id="achievements-username">{user.username}</p>
 
                     <div className="achievements-display-box">
                         <h5>Energy Points:</h5>
