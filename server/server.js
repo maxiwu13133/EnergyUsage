@@ -192,31 +192,40 @@ app.put("/API/v1/settings/password", (req, res) => {
 });
 
 app.delete("/API/v1/settings/delete", (req, res) => {
-    // reqCountSignup++;
-    let body = "";
-    req.on('data', function (chunk) {
-        if (chunk != null) { // Data may come in multiple chunks
-            body += chunk;
+    const q = url.parse(req.url, true);
+    const username = q.query.username;
+    const sqlQuery = `DELETE FROM user
+                        WHERE username='${username}'`;
+    connection.query(sqlQuery, (sqlErr, sqlRes) => {
+        if (sqlErr) {
+            if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                res.status(400).send(sqlErr.message);
+            } else {
+                res.status(404).send(sqlErr.message);
+            }
+        }
+        else {
+            res.status(200).send(JSON.stringify(sqlRes.message));
         }
     });
+});
 
-    req.on('end', function () {
-        const parsedObj = JSON.parse(body);
-        const sqlQuery = `DELETE FROM user
-                          WHERE username = '${parsedObj.username}'`;
-        connection.query(sqlQuery,
-            (sqlErr, sqlRes) => {
-                if (sqlErr) {
-                    if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
-                        res.status(400).send(sqlErr.message);
-                    } else {
-                        res.status(404).send(sqlErr.message);
-                    }
-                }
-                else {
-                    res.status(200).send(JSON.stringify(sqlRes.message));
-                }
-            });
+app.delete("/API/v1/usage/bill", (req, res) => {
+    const q = url.parse(req.url, true);
+    const bill_id = q.query.bill_id;
+    const sqlQuery = `DELETE FROM bill
+                      WHERE bill_id='${bill_id}'`;
+    connection.query(sqlQuery, (sqlErr, sqlRes) => {
+        if (sqlErr) {
+            if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
+                res.status(400).send(sqlErr.message);
+            } else {
+                res.status(404).send(sqlErr.message);
+            }
+        }
+        else {
+            res.status(200).send(JSON.stringify(sqlRes.message));
+        }
     });
 });
 
@@ -261,8 +270,9 @@ app.get("/API/v1/usage", (req, res) => { // http://mincasa.khademsam.com/API/v1/
 app.get("/API/v1/usage/bills", (req, res) => { // http://mincasa.khademsam.com/API/v1/usage/bills/?username=sam -> [{"bill_id":1,"username":"sam","month":1,"year":2022,"amount":100},{"bill_id":2,"username":"sam","month":2,"year":2022,"amount":80},{"bill_id":3,"username":"sam","month":3,"year":2022,"amount":95},{"bill_id":4,"username":"sam","month":4,"year":2022,"amount":95}]
     const q = url.parse(req.url, true);
     const username = q.query.username;
-    const sqlQuery = `SELECT * FROM bill
-                      WHERE username='${username}'`;
+    const sqlQuery = `SELECT * FROM bill 
+                      WHERE username='${username}' 
+                      ORDER BY year DESC, month DESC`;
     connection.query(sqlQuery, (sqlErr, sqlRes) => {
         if (sqlErr) {
             if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
@@ -295,11 +305,9 @@ app.post("/API/v1/usage/addbill", (req, res) => {
         } else if (parsedObj.amount <= 150) {  // For every $ extra between 100 to 150, lose 2 points
             points_to_add = 100 - ((parsedObj.amount - 100) * 2);
         }
-        const sqlQueryUpdatePoints = `UPDATE user
-                                      SET points=((SELECT points FROM user WHERE username=${parsedObj.username}) + ${points_to_add})
-                                      WHERE username=${parsedObj.username}`
-
-        connection.query(sqlQueryUpdatePoints, (sqlErr, sqlRes) => {
+        const sqlQueryGetPoints = `INSERT INTO bill (username, month, year, amount) 
+                                   VALUES ('${parsedObj.username}', ${parsedObj.month}, ${parsedObj.year}, ${parsedObj.amount})`;
+        connection.query(sqlQueryGetPoints, (sqlErr, sqlRes) => {
             if (sqlErr) {
                 if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
                     res.status(400).send(sqlErr.message);
@@ -307,9 +315,10 @@ app.post("/API/v1/usage/addbill", (req, res) => {
                     res.status(404).send(sqlErr.message);
                 }
             } else {
-                const sqlQueryGetPoints = `INSERT INTO bill (username, month, year, amount) 
-                                           VALUES ('${parsedObj.username}', ${parsedObj.month}, ${parsedObj.year}, ${parsedObj.amount})`;
-                connection.query(sqlQueryGetPoints, (sqlErr, sqlRes) => {
+                const sqlQueryUpdatePoints = `UPDATE user
+                                              SET points=points + ${points_to_add}
+                                              WHERE username='${parsedObj.username}'`
+                connection.query(sqlQueryUpdatePoints, (sqlErr, sqlRes) => {
                     if (sqlErr) {
                         if(sqlErr.code === 'ER_BAD_FIELD_ERROR') {
                             res.status(400).send(sqlErr.message);
