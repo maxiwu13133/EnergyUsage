@@ -30,7 +30,7 @@ const Home = () => {
           type='submit'
           className='custom-primary-button'
         >
-          <Link to='/signup'>
+          <Link to='/achievements'>
             <p className='link'>Achievements</p>
           </Link>
         </Button>
@@ -39,7 +39,7 @@ const Home = () => {
           type='submit'
           className='custom-primary-button'
         >
-          <Link to='/signup'>
+          <Link to='/settings'>
             <p className='link'>Settings</p>
           </Link>
         </Button>
