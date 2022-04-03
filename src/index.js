@@ -24,7 +24,7 @@ const App = () => {
         <Route path='/home' element={<HomeContainer />} />
         <Route path='/signup' element={<SignUpContainer />} />
         <Route path='/admin/admin' element={<Admin />} />
-        <Route path='/home/add-bill' element={<AddBillContainer />} />
+        <Route path='/add-bill' element={<AddBillContainer />} />
         <Route path='/usage' element={<UsageContainer/>} />
         {/* </> */}
       </Routes>

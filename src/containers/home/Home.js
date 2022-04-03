@@ -12,7 +12,7 @@ const Home = () => {
             type='submit'
             className='custom-primary-button'
           >
-            <Link to='/signup'>
+            <Link to='/usage'>
               <p className='link'>Usage</p>
             </Link>
           </Button>
@@ -21,7 +21,7 @@ const Home = () => {
             type='submit'
             className='custom-primary-button'
           >
-            <Link to='/home/add-bill'>
+            <Link to='/add-bill'>
               <p className='link'>Add Bill</p>
             </Link>
           </Button>

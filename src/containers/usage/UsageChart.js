@@ -16,6 +16,7 @@ const UsageChart = () => {
     { name: 'Page A', uv: 400, pv: 1400, amt: 2400 },
    ];
   return (
+    <React.Fragment>
     <LineChart
       width={600}
       height={300}
@@ -29,6 +30,7 @@ const UsageChart = () => {
       <YAxis />
       <Tooltip />
     </LineChart>
+    </React.Fragment>
   );
 };
 

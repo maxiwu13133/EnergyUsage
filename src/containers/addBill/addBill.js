@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUser, updateUser } from '../../components/counter/counterSlice';
+import AddBillAlert from './AddBillAlert';
 
 const AddBill = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const [showA, setShowA] = useState(true);
+  const toggleShowA = () => setShowA(!showA);
   
   return (
-    <>
+    <React.Fragment>
+    {/* <AddBillAlert show={showA}/> */}
           <Formik
             onSubmit={(values) => {
               const xhttp = new XMLHttpRequest();
@@ -35,7 +39,8 @@ const AddBill = () => {
               xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                   console.log('before if' + xhttp.readyState);
-                  dispatch(updateUser(params)) && navigate('/home')
+                  toggleShowA();
+                  setTimeout(() => toggleShowA, 2);
                   // "admin" === params.username ? navigate('/admin/admin') : navigate('/home')
                 }
               };
@@ -90,7 +95,7 @@ const AddBill = () => {
             </Form>)
             }
           </Formik>
-        </>
+        </React.Fragment>
   );
 }
 
