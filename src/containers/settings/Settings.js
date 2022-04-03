@@ -6,11 +6,12 @@ import './Settings.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, updateUser } from '../../components/counter/counterSlice';
 
 const Settings = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   return (
@@ -20,32 +21,33 @@ const Settings = () => {
 
           <Formik
             onSubmit={(values) => {
-              // const xhttp = new XMLHttpRequest();
+              const xhttp = new XMLHttpRequest();
 
-              // let params = {
-              //   username: user.username,
-              //   password: values.password
-              // };
-              // console.log(values.username);
-              // console.log(values.password);
-              // // if (values.password !== "") {
-              // xhttp.open(
-              //   'PUT',
-              //   'http://mincasa.khademsam.com/API/v1/settings/password',
-              //   true
-              // );
-              // xhttp.setRequestHeader('Content-type', 'application/JSON');
-              // xhttp.send(JSON.stringify(params));
-              // xhttp.onreadystatechange = function () {
-              //   if (this.readyState === 4 && this.status === 200) {
-              //     console.log('before if' + xhttp.readyState);
-              //     navigate('/home')
-              //   }
-              // };
-              console.log(user);
-            }}
+              let params = {
+                username: user.username,
+                password: values.password
+              };
+              console.log(values.username);
+              console.log(values.password);
+              if (values.password !== "") {
+                xhttp.open(
+                  'PUT',
+                  'http://mincasa.khademsam.com/API/v1/settings/password',
+                  true
+                );
+                xhttp.setRequestHeader('Content-type', 'application/JSON');
+                xhttp.send(JSON.stringify(params));
+                xhttp.onreadystatechange = function () {
+                  if (this.readyState === 4 && this.status === 200) {
+                    console.log(user.username + " password changed successfully");
+                    dispatch(updateUser(params)) && navigate('/home')
+                  }
+                };
+              }
+            }} 
+            
             initialValues={{
-              username: '',
+              username: user,
               password: ''
             }}
           >
@@ -79,12 +81,30 @@ const Settings = () => {
           <br />
 
           <Popup trigger={<button className="delete-button"> Permanently Delete Account </button>} modal>
-              <div className="settings-popup">
-                <p className="settings-popup-question">Are you sure? This can not be undone.</p>
-                <button className="settings-popup-btn" onClick={() => {
+            <div className="settings-popup">
+              <p className="settings-popup-question">Are you sure? This can not be undone.</p>
+              <button className="settings-popup-btn" onClick={() => {
+                const xhttp = new XMLHttpRequest();
 
-                }}>Delete Account</button>
-              </div>
+                let params = {
+                  username: user.username,
+                };
+                xhttp.open(
+                  'DELETE',
+                  'http://mincasa.khademsam.com/API/v1/usage/',
+                  true
+                );
+                xhttp.setRequestHeader('Content-type', 'application/JSON');
+                xhttp.send(JSON.stringify(params));
+                xhttp.onreadystatechange = function () {
+                  if (this.readyState === 4 && this.status === 200) {
+                    console.log(user.username + " deleted successfully");
+                    navigate('/home')
+                  }
+                };
+                
+              }}>Delete Account</button>
+            </div>
 
           </Popup>
         </div>
