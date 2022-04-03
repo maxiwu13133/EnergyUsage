@@ -1,10 +1,10 @@
 import React from 'react';
 import UsageChart from './UsageChart';
 
-const Usage = () => {
+const Usage = ({data}) => {
   return (
     <div>
-      <UsageChart />
+      <UsageChart data={data}/>
     </div>
   )
 };

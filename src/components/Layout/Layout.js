@@ -8,8 +8,9 @@ const Layout = ({ children }) => {
     <div id='login-container'>
       <div id='login-bg'>
         <div id='login-card'>
-          {window.location.pathname !== '/' &&
-          window.location.pathname !== '/signup' &&
+          {window.location.pathname !== '' ||
+          window.location.pathname !== '/' ||
+          window.location.pathname !== '/signup' ||
           window.location.pathname !== '/admin' ? (
             <HeaderBar />
           ) : null}

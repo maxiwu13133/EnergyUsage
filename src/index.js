@@ -14,6 +14,12 @@ import Admin from './admin';
 import './components/Layout/Layout.css';
 import AddBillContainer from './containers/addBill/AddBillContainer';
 import UsageContainer from './containers/usage/UsageContainer';
+import { saveState } from './redux/localStorage';
+
+
+store.subscribe(() =>  {
+  saveState(store.getState());
+})
 
 const App = () => {
   return (
@@ -21,11 +27,11 @@ const App = () => {
       <Routes>
         {/* <> */}
         <Route path='/' element={<LoginContainer />} />
-        <Route path='/home' element={<HomeContainer />} />
-        <Route path='/signup' element={<SignUpContainer />} />
-        <Route path='/admin/admin' element={<Admin />} />
-        <Route path='/add-bill' element={<AddBillContainer />} />
-        <Route path='/usage' element={<UsageContainer/>} />
+        <Route path='/home/' element={<HomeContainer />} />
+        <Route path='/signup/' element={<SignUpContainer />} />
+        <Route path='/admin/admin/' element={<Admin />} />
+        <Route path='/add-bill/' element={<AddBillContainer />} />
+        <Route path='/usage/' element={<UsageContainer/>} />
         {/* </> */}
       </Routes>
     </Layout>

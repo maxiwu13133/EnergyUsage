@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchCount } from './counterAPI';
 
-const initialState = {
+import { loadState } from '../../redux/localStorage';
+
+const persistedState = loadState();
+console.log(persistedState);
+const initialState = persistedState ? persistedState.counter : {
   value: 0,
   loginRequests: 0,
   signupRequests: 0,

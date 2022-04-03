@@ -6,6 +6,13 @@ import { selectUser } from '../../components/counter/counterSlice';
 import Usage from './Usage';
 
 const UsageContainer = () => {
+
+  const data = [
+    { name: 'Page A', uv: 400, pv: 200, amt: 2400 },
+    { name: 'Page A', uv: 400, pv: 240, amt: 2400 },
+    { name: 'Page A', uv: 400, pv: 2200, amt: 2400 },
+    { name: 'Page A', uv: 400, pv: 1400, amt: 2400 }
+  ];
   let user = useSelector(selectUser);
   console.log(user);
   const getChartValues = (values) => {
@@ -33,7 +40,7 @@ const UsageContainer = () => {
     };
   }
   return (
-    <Usage />
+    <Usage data={data} />
   )
 }
 

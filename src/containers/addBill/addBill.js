@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -12,91 +12,94 @@ const AddBill = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-  const [showA, setShowA] = useState(true);
+  const [ showA, setShowA ] = useState(true);
   const toggleShowA = () => setShowA(!showA);
-  
+  console.log(user)
   return (
     <React.Fragment>
-    {/* <AddBillAlert show={showA}/> */}
-          <Formik
-            onSubmit={(values) => {
-              const xhttp = new XMLHttpRequest();
+      {/* <AddBillAlert show={showA}/> */}
+      <Formik
+        onSubmit={(values) => {
+          const xhttp = new XMLHttpRequest();
+          console.log(user.username + ' - in addbill');
 
-              let params = {
-                username: user.username,
-                month: values.month,
-                year: values.year,
-                amount: values.amount
-              };
-              xhttp.open(
-                'POST',
-                'http://mincasa.khademsam.com/API/v1/usage/addbill/',
-                true
-              );
-              // request = {username: ... , month: ... , year: ... , amount: ... }
-              xhttp.setRequestHeader('Content-type', 'application/JSON');
-              xhttp.send(JSON.stringify(params));
-              xhttp.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                  console.log('before if' + xhttp.readyState);
-                  toggleShowA();
-                  setTimeout(() => toggleShowA, 2);
-                  // "admin" === params.username ? navigate('/admin/admin') : navigate('/home')
-                }
-              };
-            }}
-            initialValues={{
-              month: 0,
-              year: 0,
-              amount: 0,
-            }}
-          >
-            {({values, handleChange}) => 
-            (<Form>
-              <Form.Group>
-                <Form.Label>Amount</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Bill Amount'
-                  name='amount'
-                  value={values.amount}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Label>Month</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Month'
-                  name='month'
-                  value={values.month}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Label>Year</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='year'
-                  name='year'
-                  value={values.year}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <br />
-              <Button
-                variant='primary'
-                type='submit'
-                className='custom-primary-button'
-              >
-                Submit
-              </Button>
-              <br />
-            </Form>)
+          let params = {
+            username: user.username,
+            month: values.month,
+            year: values.year,
+            amount: values.amount
+          };
+          xhttp.open(
+            'POST',
+            'http://mincasa.khademsam.com/API/v1/usage/addbill/',
+            true
+          );
+          console.log(params);
+          // request = {username: ... , month: ... , year: ... , amount: ... }
+          xhttp.setRequestHeader('Content-type', 'application/JSON');
+          xhttp.send(JSON.stringify(params));
+          xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+              console.log('before if' + xhttp.readyState);
+              console.log(params)
+              // toggleShowA();
+              // setTimeout(() => toggleShowA, 2);
+              // "admin" === params.username ? navigate('/admin/admin') : navigate('/home')
             }
-          </Formik>
-        </React.Fragment>
+          };
+        }}
+        initialValues={{
+          month: 0,
+          year: 0,
+          amount: 0
+        }}
+      >
+        {({ values, handleChange }) => (
+          <Form>
+            <Form.Group>
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Bill Amount'
+                name='amount'
+                value={values.amount}
+                onChange={handleChange}
+                required
+              />
+              <Form.Label>Month</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Month'
+                name='month'
+                value={values.month}
+                onChange={handleChange}
+                required
+              />
+              <Form.Label>Year</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Year'
+                name='year'
+                value={values.year}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <br />
+            <Button
+              variant='primary'
+              type='submit'
+              className='custom-primary-button'
+            >
+              Submit
+            </Button>
+            <br />
+          </Form>
+        )}
+      </Formik>
+    </React.Fragment>
   );
-}
+};
 
 export default AddBill;

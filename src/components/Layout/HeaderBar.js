@@ -1,7 +1,5 @@
 import React from 'react';
-import { Navbar, NavDropdown, Nav, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Gear } from 'react-bootstrap-icons';
+import { Navbar, NavDropdown, Container } from 'react-bootstrap';
 import logo from '../../assets/icons/icon.svg';
 const HeaderBar = () => {
   return (
@@ -20,6 +18,7 @@ const HeaderBar = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
           <NavDropdown id='basic-nav-dropdown'>
+            <NavDropdown.Item href='home'>Home</NavDropdown.Item>
             <NavDropdown.Item href='usage'>Usage</NavDropdown.Item>
             <NavDropdown.Item href='add-bill'>Add a Bill</NavDropdown.Item>
             <NavDropdown.Item href='achievements'>
