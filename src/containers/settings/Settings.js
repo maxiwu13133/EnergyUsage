@@ -15,8 +15,8 @@ const Settings = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   return (
-    <div id='settings-container'>
-      <div id='settings-bg'>
+    // <div id='settings-container'>
+    //   <div id='settings-bg'>
         <div id='settings-card'>
 
           <Formik
@@ -108,8 +108,8 @@ const Settings = () => {
 
           </Popup>
         </div>
-      </div>
-    </div>
+    //   </div>
+    // </div>
   );
 };
 

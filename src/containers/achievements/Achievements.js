@@ -41,8 +41,8 @@ const Achievements = () => {
     })
 
     return (
-        <div id='achievements-container'>
-            <div id='achievements-bg'>
+        // <div id='achievements-container'>
+        //     <div id='achievements-bg'>
                 <div id='achievements-card'>
 
                     <p id="achievements-username">{user.username}</p>
@@ -62,10 +62,9 @@ const Achievements = () => {
                         <h5>Titles:</h5>
                         <p>{info.titles}</p>
                     </div>
-
                 </div>
-            </div>
-        </div>
+        //     </div>
+        // </div>
     );
 };
 
