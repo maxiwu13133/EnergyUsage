@@ -34,3 +34,8 @@
   font-size: 0.85rem;
   color: #5D6E1E;
 }
+
+.list-group {
+  max-height: 20rem; 
+  overflow-y: auto;
+}

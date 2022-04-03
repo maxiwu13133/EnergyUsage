@@ -2,8 +2,9 @@ import React from 'react';
 import { Navbar, NavDropdown, Container } from 'react-bootstrap';
 import logo from '../../assets/icons/icon.svg';
 const HeaderBar = () => {
+  console.log(window.location)
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar bg='white' expand='lg'>
       <Container>
         <Navbar.Brand href='home'>
           <img
@@ -16,7 +17,9 @@ const HeaderBar = () => {
         </Navbar.Brand>
         <Navbar.Brand>MinCasa</Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className='justify-content-end'>
+        {window.location.pathname !== '/' ? 
+        (
+          <Navbar.Collapse className='justify-content-end'>
           <NavDropdown id='basic-nav-dropdown'>
             <NavDropdown.Item href='home'>Home</NavDropdown.Item>
             <NavDropdown.Item href='usage'>Usage</NavDropdown.Item>
@@ -28,7 +31,7 @@ const HeaderBar = () => {
             {/* <Gear color='#94B447'/> */}
             <NavDropdown.Item href='settings'>Settings</NavDropdown.Item>
           </NavDropdown>
-        </Navbar.Collapse>
+        </Navbar.Collapse>) : null}
       </Container>
     </Navbar>
   );

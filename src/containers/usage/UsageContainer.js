@@ -15,7 +15,21 @@ const UsageContainer = () => {
   ];
   let user = useSelector(selectUser);
   // console.log(user);
-  const getUsageData = () => {
+  useEffect(() => {
+    const month = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
     const xhttp = new XMLHttpRequest();
     // if (values.password !== "") {
     xhttp.open(
@@ -29,16 +43,14 @@ const UsageContainer = () => {
       if (this.readyState === 4 && this.status === 200) {
         console.log('before if' + xhttp.readyState);
         const response = JSON.parse(this.responseText);
-        console.log(response)
-        console.log(this.responseText)
+        response.map((data) => data.month = month[data.month - 1])
         dispatch(addBills(response));
       }
     };
-  }
+  }, [dispatch, user.username])
   // useEffect(() => {
   // },);
   // const usageData = getChartValues();
-    getUsageData()
   return (
     <Usage data={data} />
   )

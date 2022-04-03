@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   LineChart,
   Line,
@@ -7,9 +8,13 @@ import {
   YAxis,
   Tooltip
 } from 'recharts';
+import { selectBills } from '../../components/counter/counterSlice';
 
-const UsageChart = ({data}) => {
-  const month = [
+const UsageChart = () => {
+  let usageData = useSelector(selectBills);
+  const date = new Date();
+  const month = date.getMonth();
+  const months = [
     'January',
     'February',
     'March',
@@ -28,13 +33,13 @@ const UsageChart = ({data}) => {
       <LineChart
         width={600}
         height={300}
-        data={data}
+        data={usageData.slice(0, 6).reverse()}
         margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
       >
-        <Line type='monotone' dataKey='pv' stroke='#8884d8' />
-        <Line type='monotone' dataKey='uv' stroke='#8884d8' />
+        <Line type='monotone' dataKey='amount' stroke='#8884d8' />
+        <Line type='monotone' dataKey='avg' stroke='#8884d8' />
         <CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
-        <XAxis dataKey='name' />
+        <XAxis dataKey='month' />
         <YAxis />
         <Tooltip />
       </LineChart>
