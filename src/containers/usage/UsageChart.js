@@ -8,7 +8,7 @@ import {
   Tooltip
 } from 'recharts';
 
-const UsageChart = ({data, usageData}) => {
+const UsageChart = ({data}) => {
   const month = [
     'January',
     'February',

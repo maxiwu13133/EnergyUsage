@@ -24,9 +24,9 @@ const UsageList = ({ data }) => {
       <ListGroup>
         {usageData.map((user) => (
           <ListGroup.Item>
-            {user.month}
-            {user.amount}
-            {user.year}
+            Amount: {user.amount}
+            Month: {month[user.month - 1]}
+            Year: {user.year}
           </ListGroup.Item>
         ))}
       </ListGroup>
