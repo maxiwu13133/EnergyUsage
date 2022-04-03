@@ -43,8 +43,8 @@ const SignUp = (props) => {
               password: ''
             }}
           >
-            {({values, handleChange}) => 
-            (<Form>
+            {({handleSubmit, values, handleChange}) => 
+            (<Form onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control

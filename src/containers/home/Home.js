@@ -5,46 +5,46 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <>
-          <Stack gap={3}>
-          <Button
-            variant='primary'
-            type='submit'
-            className='custom-primary-button'
-          >
-            <Link to='/usage'>
-              <p className='link'>Usage</p>
-            </Link>
-          </Button>
-          <Button
-            variant='primary'
-            type='submit'
-            className='custom-primary-button'
-          >
-            <Link to='/add-bill'>
-              <p className='link'>Add Bill</p>
-            </Link>
-          </Button>
-          <Button
-            variant='primary'
-            type='submit'
-            className='custom-primary-button'
-          >
-            <Link to='/signup'>
-              <p className='link'>Achievements</p>
-            </Link>
-          </Button>
-          <Button
-            variant='primary'
-            type='submit'
-            className='custom-primary-button'
-          >
-            <Link to='/signup'>
-              <p className='link'>Settings</p>
-            </Link>
-          </Button>
-          </Stack>
-    </>
+    <React.Fragment>
+      <Stack gap={3}>
+        <Button
+          variant='primary'
+          type='submit'
+          className='custom-primary-button'
+        >
+          <Link to='/usage'>
+            <p className='link'>Usage</p>
+          </Link>
+        </Button>
+        <Button
+          variant='primary'
+          type='submit'
+          className='custom-primary-button'
+        >
+          <Link to='/add-bill'>
+            <p className='link'>Add Bill</p>
+          </Link>
+        </Button>
+        <Button
+          variant='primary'
+          type='submit'
+          className='custom-primary-button'
+        >
+          <Link to='/signup'>
+            <p className='link'>Achievements</p>
+          </Link>
+        </Button>
+        <Button
+          variant='primary'
+          type='submit'
+          className='custom-primary-button'
+        >
+          <Link to='/signup'>
+            <p className='link'>Settings</p>
+          </Link>
+        </Button>
+      </Stack>
+    </React.Fragment>
   );
 };
 

@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../components/counter/counterSlice';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addBills, selectUser } from '../../components/counter/counterSlice';
+import './Usage.css'
 import Usage from './Usage';
 
 const UsageContainer = () => {
-
+  const dispatch = useDispatch();
   const data = [
     { name: 'Page A', uv: 400, pv: 200, amt: 2400 },
     { name: 'Page A', uv: 400, pv: 240, amt: 2400 },
@@ -14,31 +14,31 @@ const UsageContainer = () => {
     { name: 'Page A', uv: 400, pv: 1400, amt: 2400 }
   ];
   let user = useSelector(selectUser);
-  console.log(user);
-  const getChartValues = (values) => {
+  // console.log(user);
+  const getUsageData = () => {
     const xhttp = new XMLHttpRequest();
-
-    let params = {
-      username: values.username,
-      password: values.password
-    };
-    console.log(values.username);
-    console.log(values.password);
     // if (values.password !== "") {
     xhttp.open(
-      'POST',
-      'http://mincasa.khademsam.com/API/v1/login/',
+      'GET',
+      `http://mincasa.khademsam.com/API/v1/usage/bills/?username=${user.username}`,
       true
     );
     xhttp.setRequestHeader('Content-type', 'application/JSON');
-    xhttp.send(JSON.stringify(params));
+    xhttp.send();
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         console.log('before if' + xhttp.readyState);
-        // dispatch(incrementLogin()) && navigate('/admin/admin');
+        const response = JSON.parse(this.responseText);
+        console.log(response)
+        console.log(this.responseText)
+        dispatch(addBills(response));
       }
     };
   }
+  // useEffect(() => {
+  // },);
+  // const usageData = getChartValues();
+    getUsageData()
   return (
     <Usage data={data} />
   )

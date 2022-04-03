@@ -1,23 +1,17 @@
-import React from "react";
-import { Toast } from "react-bootstrap";
+import React from 'react';
+import { Toast } from 'react-bootstrap';
 
-const AddBillAlert = (show) => {
+const AddBillAlert = ({ show, toggleShowA }) => {
   return (
-    <>
-    <Toast show={show}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
-        </>
-  )
-}
+    <React.Fragment>
+      <Toast show={show} delay={2000} onClose={toggleShowA}>
+        <Toast.Header>
+          <strong className='me-auto'>MinCasa</strong>
+        </Toast.Header>
+        <Toast.Body>Bill Upload Success!</Toast.Body>
+      </Toast>
+    </React.Fragment>
+  );
+};
 
 export default AddBillAlert;
