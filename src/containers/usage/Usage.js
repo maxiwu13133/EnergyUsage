@@ -36,10 +36,10 @@ const Usage = ({ data }) => {
   return (
     <React.Fragment>
       <Tabs fill variant='tabs' defaultActiveKey='list'>
-        <Tab eventKey='list' title='List'>
+        <Tab tabClassName='list' eventKey='list' title='List'>
           <UsageList data={data} />
         </Tab>
-        <Tab eventKey='graph' title='Graph'>
+        <Tab tabClassName='list' eventKey='graph' title='Graph'>
           <UsageChart data={data} />
         </Tab>
       </Tabs>

@@ -1,13 +1,13 @@
 .appContent {
   margin-top: 2rem;
 }
-#login-container {
+#layout-container {
   height: 100vh;
   background-color: #94B447;
 }
 
-#login-bg {
-  /* background-image: url("../../config/assets/images/login-bg.jpg"); */
+#layout-bg {
+  /* background-image: url("../../config/assets/images/layout-bg.jpg"); */
   height: 30rem;
   background-position: center;
   background-repeat: no-repeat;
@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-#login-card {
+#layout-card {
 
   background-color: #FFF;
   width: auto;
@@ -31,7 +31,7 @@
   border-style: none !important;
 }
 
-#login-signup-link {
+#layout-signup-link {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #5D6E1E;

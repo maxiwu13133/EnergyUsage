@@ -5,9 +5,9 @@ import './Layout.css';
 
 const Layout = ({ children }) => {
   return (
-    <div id='login-container'>
-      <div id='login-bg'>
-        <div id='login-card'>
+    <div id='layout-container'>
+      <div id='layout-bg'>
+        <div id='layout-card'>
           {window.location.pathname !== '' ||
           window.location.pathname !== '/' ||
           window.location.pathname !== '/signup' ||
