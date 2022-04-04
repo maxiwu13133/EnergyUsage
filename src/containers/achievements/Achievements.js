@@ -21,8 +21,7 @@ const Achievements = () => {
         }
 
         const parsedData = JSON.parse(data)
-        info.points = parsedData.points
-        console.log(info)
+        info.points = parsedData[0].points
     }
 
     const getInfo = () => {
