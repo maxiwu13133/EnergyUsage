@@ -102,7 +102,6 @@ const Settings = () => {
                     navigate('/home')
                   }
                 };
-                
               }}>Delete Account</button>
             </div>
 
