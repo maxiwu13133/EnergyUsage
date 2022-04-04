@@ -91,7 +91,7 @@ const Settings = () => {
                 };
                 xhttp.open(
                   'DELETE',
-                  'http://mincasa.khademsam.com/API/v1/usage/', 
+                  'http://mincasa.khademsam.com/API/v1/settings/delete/', 
                   true
                 );
                 xhttp.setRequestHeader('Content-type', 'application/JSON');
@@ -102,7 +102,6 @@ const Settings = () => {
                     navigate('/home')
                   }
                 };
-                
               }}>Delete Account</button>
             </div>
 
