@@ -2,37 +2,14 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert'
-import AddBillAlert from './AddBillAlert';
-import { render } from '@testing-library/react';
-function AlertDismissibleExample() {
-  const [show, setShow] = useState(true);
-
-  if (show) {
-    return (
-      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-        <p>
-          Change this and that and try again. Duis mollis, est non commodo
-          luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-          Cras mattis consectetur purus sit amet fermentum.
-        </p>
-      </Alert>
-    );
-  }
-  return <Button onClick={() => setShow(true)}>Show Alert</Button>;
-}
 
 const AddBill = ({user}) => {
-  const navigate = useNavigate();
   const [ showA, setShowA ] = useState(false);
   const toggleShowA = () => setShowA(!showA);
   // console.log(user)
   return (
     <React.Fragment>
       
-      <AddBillAlert show={showA} toggleShow={toggleShowA} />
       <Formik
         onSubmit={(values) => {
           const xhttp = new XMLHttpRequest();
@@ -56,13 +33,8 @@ const AddBill = ({user}) => {
           xhttp.send(JSON.stringify(params));
           xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-              console.log('before if' + xhttp.readyState);
-              console.log(params)
-              console.log("success")
-              render(<AlertDismissibleExample/>);
               toggleShowA();
-              setTimeout(() => toggleShowA(), 2000);
-              // "admin" === params.username ? navigate('/admin/admin') : navigate('/home')
+              setTimeout(() => toggleShowA(), 4000);
             }
           };
         }}

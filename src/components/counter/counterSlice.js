@@ -10,10 +10,11 @@ const initialState = persistedState ? persistedState.counter : {
   requests: {},
   status: 'idle',
   user: {
-    username: null,
+    bills: [],
     password: null,
     points: 0,
-    bills: []
+    stats: {},
+    username: null,
   }
 };
 
@@ -58,8 +59,8 @@ export const counterSlice = createSlice({
     addBills: (state, action) => {
       state.user.bills = action.payload;
     },
-    filterBills: (state, action) => {
-      
+    addStats: (state, action) => {
+      state.user.stats = action.payload;
     },
     decrement: (state) => {
       state.value -= 1;
@@ -86,7 +87,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, updateRequests, updateUser, updatePoints, addBills, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, updateRequests, updateUser, updatePoints, addBills, addStats, incrementByAmount } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -98,7 +99,7 @@ export const selectCountAdmin = (state) => state.counter.adminRequests;
 export const selectUser = (state) => state.counter.user;
 export const selectBills = (state) => state.counter.user.bills;
 export const selectRequests = (state) => state.counter.requests;
-
+export const selectUserStats = (state) => state.counter.user.stats;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount) => (dispatch, getState) => {

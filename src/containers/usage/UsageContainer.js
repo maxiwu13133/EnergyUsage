@@ -7,14 +7,7 @@ import Usage from './Usage';
 
 const UsageContainer = () => {
   const dispatch = useDispatch();
-  const data = [
-    { name: 'Page A', uv: 400, pv: 200, amt: 2400 },
-    { name: 'Page A', uv: 400, pv: 240, amt: 2400 },
-    { name: 'Page A', uv: 400, pv: 2200, amt: 2400 },
-    { name: 'Page A', uv: 400, pv: 1400, amt: 2400 }
-  ];
   let user = useSelector(selectUser);
-  // console.log(user);
   useEffect(() => {
     const month = [
       'January',
@@ -31,7 +24,6 @@ const UsageContainer = () => {
       'December'
     ];
     const xhttp = new XMLHttpRequest();
-    // if (values.password !== "") {
     xhttp.open(
       'GET',
       `http://mincasa.khademsam.com/API/v1/usage/bills/?username=${user.username}`,
@@ -47,12 +39,9 @@ const UsageContainer = () => {
         dispatch(addBills(response));
       }
     };
-  }, [dispatch, user.username])
-  // useEffect(() => {
-  // },);
-  // const usageData = getChartValues();
+  }, [dispatch, user.username]);
   return (
-    <Usage data={data} />
+    <Usage />
   )
 }
 
