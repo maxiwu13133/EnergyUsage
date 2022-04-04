@@ -58,6 +58,9 @@ export const counterSlice = createSlice({
     addBills: (state, action) => {
       state.user.bills = action.payload;
     },
+    filterBills: (state, action) => {
+      
+    },
     decrement: (state) => {
       state.value -= 1;
     },

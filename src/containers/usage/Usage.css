@@ -23,12 +23,11 @@ button.nav-link.active {
   justify-content: center;
 }
 
-#login-card {
+#layout-card {
 
   background-color: #FFF;
   width: auto;
-  height: 32rem;
-  max-height: 32rem;
+  height: 32rem !important;
   padding: 2rem;
   margin-top: 10rem;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);

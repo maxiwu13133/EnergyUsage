@@ -32,7 +32,6 @@ const Admin = () => {
   };
   useEffect(() => {
     //check local token or something
-    console.log("hello")
     authFunc();
   }, []);
   return (
