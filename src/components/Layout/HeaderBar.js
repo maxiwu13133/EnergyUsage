@@ -27,6 +27,9 @@ const HeaderBar = () => {
             <NavDropdown.Item href='achievements'>
               Achievements
             </NavDropdown.Item>
+            {/* <NavDropdown.Item href='/' onClick={() => localStorage.clear()}>
+              Sign Out
+            </NavDropdown.Item> */}
             <NavDropdown.Divider />
             {/* <Gear color='#94B447'/> */}
             <NavDropdown.Item href='settings'>Settings</NavDropdown.Item>
