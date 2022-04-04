@@ -7,7 +7,7 @@ const persistedState = loadState();
 console.log(persistedState);
 const initialState = persistedState ? persistedState.counter : {
   value: 0,
-  requests: null,
+  requests: {},
   status: 'idle',
   user: {
     username: null,

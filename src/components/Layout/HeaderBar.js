@@ -1,8 +1,9 @@
 import React from 'react';
 import { Navbar, NavDropdown, Container } from 'react-bootstrap';
+
 import logo from '../../assets/icons/icon.svg';
+
 const HeaderBar = () => {
-  console.log(window.location)
   return (
     <Navbar bg='white' expand='lg'>
       <Container>
@@ -27,12 +28,12 @@ const HeaderBar = () => {
             <NavDropdown.Item href='achievements'>
               Achievements
             </NavDropdown.Item>
-            {/* <NavDropdown.Item href='/' onClick={() => localStorage.clear()}>
-              Sign Out
-            </NavDropdown.Item> */}
             <NavDropdown.Divider />
             {/* <Gear color='#94B447'/> */}
             <NavDropdown.Item href='settings'>Settings</NavDropdown.Item>
+            <NavDropdown.Item href='/' onClick={() => localStorage.clear()}>
+              Sign Out
+            </NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>) : null}
       </Container>

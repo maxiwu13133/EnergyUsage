@@ -1,0 +1,51 @@
+.nav-link {
+  color: #94B447;
+}
+.list {
+  background-color: #94B447;
+}
+button.nav-link.active {
+  background-color: #94B447;
+  /* color: white; */
+}
+#login-container {
+  height: 100vh;
+  background-color: #94B447;
+}
+
+#login-bg {
+  /* background-image: url("../../config/assets/images/login-bg.jpg"); */
+  height: 30rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+#layout-card {
+
+  background-color: #FFF;
+  width: auto;
+  height: 45rem !important;
+  /* max-height: 32rem; */
+  padding: 2rem;
+  margin-top: 10rem;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+.custom-primary-button {
+  background-color: #5D6E1E !important;
+  border-style: none !important;
+}
+
+#login-signup-link {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #5D6E1E;
+}
+
+.list-group {
+  max-height: 20rem; 
+  overflow-y: auto;
+}
